@@ -14,7 +14,7 @@ def ExtractPDF(filename):
     pages = []
     
     #Reads the PDF in given path
-    reader = PdfReader(f'Assignment-1 (1)/SamplePolicyDocs/Auto/{filename}') 
+    reader = PdfReader(f'C:/Users/11110/Downloads/Assignment-1 (1)/SamplePolicyDocs/Auto/{filename}') 
 
     for i in range(0,len(reader.pages)):
         # getting pages from the pdf file one by one
@@ -25,13 +25,15 @@ def ExtractPDF(filename):
 
         #storing page by page text in a list
         pages.append(text)
+
+    print(text,repr(text)[1:-1])
     
 
 #Generating the Index
 def IndexGenerator():
 
     #Iterating through the folder to get all pdfs from given path
-    for file in os.listdir("Assignment-1 (1)/SamplePolicyDocs/Auto/"):
+    for file in os.listdir("C:/Users/11110/Downloads/Assignment-1 (1)/SamplePolicyDocs/Auto/"):
 
         #Generate page by page data from ExtractPage function defined above
         ExtractPDF(file)
@@ -76,6 +78,34 @@ def IndexGenerator():
         index_list[file] = index
 
 
+#Function to normalize query
+def Normalize(query):
+
+    #Import required functions from nltk
+    #nltk.download("stopwords")
+    from nltk.corpus import stopwords
+    from nltk.stem import PorterStemmer
+
+    stemmer = PorterStemmer()
+
+    #nltk.download('punkt')
+    #nltk.download('averaged_perceptron_tagger')
+
+    
+    #Find all tokens (words) from the query
+    tokens = nltk.word_tokenize(query)
+
+    filtered_query = []
+
+    #Get stop words list and add only non stopwords to filtered_query
+    stop_words = set(stopwords.words('english'))
+    for word in tokens:
+        if word.casefold() not in stop_words:
+            filtered_query.append(word)
+
+    #Return a final filtered_query
+    return filtered_query
+
 #Dictionary to contain document by document indices
 index_list = {}
 
@@ -86,11 +116,13 @@ IndexGenerator()
 #Get Query
 query = input("Enter Query: ")
 
+normalized_query = Normalize(query)
+
 result = {}
 
 
 #Iterate through the overall index to find all documents with query word. If yes, returns all pages with the query, else returns nothing
-for word in query.split(' '):
+for word in normalized_query:
     for file_name in index_list:
         if(file_name in result):
             if word.casefold() in index_list[file_name]:
