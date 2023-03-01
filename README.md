@@ -1,4 +1,11 @@
 # Information Retrieval Assignment
+
+01-03-2023
+
+Index_creator_Updated has a basic paragraph-wise retriever but not the best. If better solution can be found, best to go with that
+
+
+28-03-2023
  
 Index_Creator contains a basic code to build an index and search through with a query.
 Works for files in Property folder with good accuracy.
