@@ -6,6 +6,8 @@ nltk.download("stopwords")
 from nltk.corpus import stopwords
 import os
 from PyPDF2 import PdfReader
+from tkinter import *
+import time
 
 #Read The PDF and Extract Text
 
@@ -135,8 +137,43 @@ index_list = {}
 IndexGenerator()
 
 
-#Get Query
-query = input("Enter Query: ")
+#GUI
+
+root = Tk()
+
+root.title("Search Engine")
+
+root.configure(bg='#d4fffc')
+
+
+break_text = Label(root,text="\nInformation Retrieval Search Engine\n",font="verdana",bg='#d4fffc')
+
+break_text.grid(row = 0)
+    
+
+search_bar = Entry(root,width = 50,bd='5px',relief="flat",font='verdana')
+
+search_bar.grid(row = 2)
+
+#Getting the input from the search box
+def getInput():
+    global query
+    query = search_bar.get()
+    query = query.casefold()
+    root.destroy()
+
+break_text_2 = Label(root,text="\n",bg='#d4fffc')
+
+break_text_2.grid(row = 3)
+
+search_button = Button(root,text="Search",width = 25,activeforeground = "red",font='verdana',bg='#4efcf1',command=getInput)
+
+search_button.grid(row = 4)
+
+root.mainloop()
+
+
+#Normalize Query
 
 normalized_query = Normalize(query)
 
@@ -159,8 +196,21 @@ for word in normalized_query:
         
 #Result will be a dictionary with keys as document names and values as a set of all pages where any query word was found
                 
-#print(result)
 
+#Create a GUI to print results
+                
+srp = Tk()
+
+head = Label(srp,text="Results\n",font="verdana")
+head.grid(row = 0)
+
+T = Text(srp,yscrollcommand=True,xscrollcommand=True,font='verdana')
+
+T.grid(row = 1)
+
+counter = 0
+
+time_1 = time.time()
 
 #Iterate through result, each word in normalized_query, and page_number from result set and execute ParagraphRetriever with the above as parameters                
 for file_name in result:
@@ -173,11 +223,19 @@ for file_name in result:
     #Take each paragraph in final_set and print it. Try except here is to handle null
     for para in result_paras:
         try:
-            print(file_name+":  "+para+'\n')
+            T.insert(END,file_name+":  "+para+'\n\n')
+            counter+=1
         except:
-            print()
+            T.insert(END,'')
+
+time_2 = time.time()
+
+T.insert(END,f"\n{counter} Results Retrieved in {(time_2 - time_1):.1f} seconds")
 
 
+T.config(state=DISABLED)
+
+srp.mainloop()
 
     
     
