@@ -1,5 +1,9 @@
 # Information Retrieval Assignment
 
+05-03-2023
+
+Created GUI for search and results page. Updated in index_creator_updated_gui
+
 01-03-2023
 
 Index_creator_Updated has a basic paragraph-wise retriever but not the best. If better solution can be found, best to go with that
