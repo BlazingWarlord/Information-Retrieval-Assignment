@@ -16,7 +16,7 @@ def ExtractPDF(filename):
     pages = []
     
     #Reads the PDF in given path
-    reader = PdfReader(f'C:/Users/11110/Downloads/Assignment-1 (1)/SamplePolicyDocs/Auto/{filename}') 
+    reader = PdfReader(f'C:/Users/11110/Downloads/Assignment-1 (1)/SamplePolicyDocs/Auto/{filename}')
 
     for i in range(0,len(reader.pages)):
         # getting pages from the pdf file one by one
@@ -28,7 +28,6 @@ def ExtractPDF(filename):
         #storing page by page text in a list
         pages.append(text)
 
-    #print(text,repr(text)[1:-1])
     
 
 #Generating the Index
@@ -87,13 +86,6 @@ def Normalize(query):
     #Import required functions from nltk
     #nltk.download("stopwords")
     from nltk.corpus import stopwords
-    from nltk.stem import PorterStemmer
-
-    stemmer = PorterStemmer()
-
-    #nltk.download('punkt')
-    #nltk.download('averaged_perceptron_tagger')
-
     
     #Find all tokens (words) from the query
     tokens = nltk.word_tokenize(query)
@@ -133,9 +125,14 @@ def ParagraphRetriever(filename,page_number,query):
 #Dictionary to contain document by document indices
 index_list = {}
 
+time_bi = time.time()
+
 #Creating Index Document by Document
 IndexGenerator()
 
+time_ai = time.time()
+
+print("Index generation time: ",time_ai - time_bi)
 
 #GUI
 
@@ -170,6 +167,15 @@ search_button = Button(root,text="Search",width = 25,activeforeground = "red",fo
 
 search_button.grid(row = 4)
 
+break_text_3 = Label(root,text="\n",bg='#d4fffc')
+
+break_text_3.grid(row = 5)
+
+footer_bar = Label(root,text="Built by Anirudh Ramesh, Kallem Sai Sreekar, Mitin Reddy Kancharla, Asim Abdul Bari",font=('verdana',10),relief='flat',bg='#d4fffc')
+
+footer_bar.grid(row = 6)
+
+
 root.mainloop()
 
 
@@ -200,6 +206,8 @@ for word in normalized_query:
 #Create a GUI to print results
                 
 srp = Tk()
+
+srp.title("Result Page")
 
 head = Label(srp,text="Results\n",font="verdana")
 head.grid(row = 0)
