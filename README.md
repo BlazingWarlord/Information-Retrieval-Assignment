@@ -1,23 +1,22 @@
-# Information Retrieval Assignment
-
-05-03-2023
-
-Created GUI for search and results page. Updated in index_creator_updated_gui
-
-01-03-2023
-
-Index_creator_Updated has a basic paragraph-wise retriever but not the best. If better solution can be found, best to go with that
+Search Engine
 
 
-28-03-2023
- 
-Index_Creator contains a basic code to build an index and search through with a query.
-Works for files in Property folder with good accuracy.
+Built by Blazing Warlord
 
-Also added basic Normalizer to remove stop words from input query
+Built in Python 3.10.3
 
-Messes up for files in Auto folder (more a problem with the files in Auto but need to find a way to reduce error)
 
-Need to find a way to extract data paragraph by paragraph.
+Modules required to run the code:
 
-Code is commented Ask me if anything more is required.
+nltk: https://pypi.org/project/nltk/
+
+PyPDF2: https://pypi.org/project/PyPDF2/
+
+Tkinter: pip install tk
+
+Time module
+
+OS module
+
+
+Store all files to be indexed in SamplePolicyDocs/Auto in the same folder as the Main Code. 
