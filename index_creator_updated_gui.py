@@ -16,7 +16,7 @@ def ExtractPDF(filename):
     pages = []
     
     #Reads the PDF in given path
-    reader = PdfReader(f'C:/Users/11110/Downloads/Assignment-1 (1)/SamplePolicyDocs/Auto/{filename}')
+    reader = PdfReader(f'SamplePolicyDocs/Auto/{filename}')
 
     for i in range(0,len(reader.pages)):
         # getting pages from the pdf file one by one
@@ -35,7 +35,7 @@ def ExtractPDF(filename):
 def IndexGenerator():
 
     #Iterating through the folder to get all pdfs from given path
-    for file in os.listdir("C:/Users/11110/Downloads/Assignment-1 (1)/SamplePolicyDocs/Auto/"):
+    for file in os.listdir("SamplePolicyDocs/Auto/"):
 
         #Generate page by page data from ExtractPage function defined above
         ExtractPDF(file)
@@ -105,7 +105,7 @@ def Normalize(query):
 def ParagraphRetriever(filename,page_number,query):
     
     #Read PDF and extract data by page. Both PDF name and page number given as parameters for the function 
-    reader = PdfReader(f"C:/Users/11110/Downloads/Assignment-1 (1)/SamplePolicyDocs/Auto/{filename}")
+    reader = PdfReader(f"SamplePolicyDocs/Auto/{filename}")
     page = reader.pages[page_number]
     text = page.extract_text()
 
@@ -171,7 +171,7 @@ break_text_3 = Label(root,text="\n",bg='#d4fffc')
 
 break_text_3.grid(row = 5)
 
-footer_bar = Label(root,text="Built by Anirudh Ramesh, Kallem Sai Sreekar, Mitin Reddy Kancharla, Asim Abdul Bari",font=('verdana',10),relief='flat',bg='#d4fffc')
+footer_bar = Label(root,text="Built by Blazing Warlord",font=('verdana',10),relief='flat',bg='#d4fffc')
 
 footer_bar.grid(row = 6)
 
